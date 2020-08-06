@@ -208,7 +208,7 @@ function calculateTotalWeightDonut(data) {
 
   return total;
 }
-// Modfied to sort total weight lifted each day of week
+//Added function for correct bar graph info
 function calculateTotalWeightBar(data) {
   let total = [0, 0, 0, 0, 0, 0, 0];
   console.log(data);
@@ -266,6 +266,7 @@ function calculateTotalWeightBar(data) {
 
   return total;
 }
+//Added function for correct line graph info
 function durationLine(data) {
   let total = [0, 0, 0, 0, 0, 0, 0];
   console.log(data);
@@ -295,7 +296,7 @@ function durationLine(data) {
 
   return total;
 }
-// Modifed for no repeating exercise name
+
 function workoutNames(data) {
   let workouts = [];
   data.forEach(workout => {
