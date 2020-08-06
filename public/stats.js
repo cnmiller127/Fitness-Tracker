@@ -280,25 +280,25 @@ function durationLine(data) {
   console.log(data);
   data.forEach(workout => {
     if(workout.day === 0){
-     total[0] = workout.totalDuration;
+     total[0] += workout.totalDuration;
     }
     else if(workout.day === 1){
-      total[1] = workout.totalDuration; 
+      total[1] += workout.totalDuration; 
     }
     else if(workout.day === 2){
-      total[2] = workout.totalDuration;
+      total[2] += workout.totalDuration;
     }
     else if(workout.day === 3){
-      total[3] = workout.totalDuration; 
+      total[3] += workout.totalDuration; 
     }
     else if(workout.day === 4){
-      total[4] = workout.totalDuration; 
+      total[4] += workout.totalDuration; 
     }
     else if(workout.day === 5){
-      total[5] = workout.totalDuration; 
+      total[5] += workout.totalDuration; 
         }
     else if(workout.day === 6){
-      total[6] = workout.totalDuration; 
+      total[6] += workout.totalDuration; 
     }
   });
 
