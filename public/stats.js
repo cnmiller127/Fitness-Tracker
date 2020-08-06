@@ -197,12 +197,14 @@ function duration(data) {
 }
 
 function calculateTotalWeight(data) {
-  let total = [];
-
+  let total = [0,0,0,0,0,0,0];
+  console.log(data);
   data.forEach(workout => {
-    workout.exercises.forEach(exercise => {
-      total += exercise.weight;
-    });
+    if(workout.day === "4"){
+     workout.exercises.forEach(exercise => {
+       total[0] += exercise.weight
+     })
+    }
   });
 
   return total;

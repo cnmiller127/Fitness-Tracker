@@ -22,5 +22,5 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://cnmiller127:superBase93!@
 
 // Listen on port 3000
 app.listen(PORT, () => {
-  console.log("App running!");
+  console.log("App running! on http://localhost:3007");
 });

@@ -2,8 +2,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const WorkoutsSchema = new Schema({
-  day: {
+  date: {
     type: Date,
+    required: true
+  },
+  day: {
+    type: String,
     required: true
   },
 
@@ -27,7 +31,7 @@ WorkoutsSchema.methods.getTotalDuration = async function() {
   this.totalDuration = 0;
   this.exercises.forEach(element => {
     this.totalDuration += Number(element.duration);
-    console.log("T DURATE:", this.totalDuration);
+    //console.log("T DURATE:", this.totalDuration);
   });
 
   return Number(this.totalDuration);
