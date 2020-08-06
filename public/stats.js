@@ -187,23 +187,14 @@ function populateChart(data) {
     }
   });
 }
-// Modified to loop through each exercise duration within workout and see if that exercise exists
+
 function durationPie(data) {
   let durations = [];
-
   data.forEach(workout => {
     workout.exercises.forEach(exercise => {
-    if(!durations.includes(exercise))
-    {
-    durations.push(exercise.duration);
-    }
-    else{
-      var found = durations.findIndex(exercise);
-      durations[found] += exercise.duration;
-    }
-    })
+      durations.push(exercise.duration);
+    });
   });
-
   return durations;
 }
 function calculateTotalWeightDonut(data) {
@@ -307,15 +298,10 @@ function durationLine(data) {
 // Modifed for no repeating exercise name
 function workoutNames(data) {
   let workouts = [];
-
   data.forEach(workout => {
     workout.exercises.forEach(exercise => {
-    if(!workouts.includes(exercise.name))
-    {
       workouts.push(exercise.name);
-    }
     });
-  });
-  
+  }); 
   return workouts;
 }
