@@ -200,9 +200,53 @@ function calculateTotalWeight(data) {
   let total = [0,0,0,0,0,0,0];
   console.log(data);
   data.forEach(workout => {
-    if(workout.day === "4"){
+    if(workout.day === 0){
+      workout.exercises.forEach(exercise => {
+        if(exercise.weight){
+        total[0] += exercise.weight;
+        }
+      })
+    }
+    else if(workout.day === 1){
+      workout.exercises.forEach(exercise => {
+        if(exercise.weight){
+        total[1] += exercise.weight;
+        }
+      })
+    }
+    else if(workout.day === 2){
+      workout.exercises.forEach(exercise => {
+        if(exercise.weight){
+        total[2] += exercise.weight;
+        }
+      })
+    }
+    else if(workout.day === 3){
+      workout.exercises.forEach(exercise => {
+        if(exercise.weight){
+        total[3] += exercise.weight;
+        }
+      })
+    }
+    else if(workout.day === 4){
+      workout.exercises.forEach(exercise => {
+        if(exercise.weight){
+        total[4] += exercise.weight;
+        }
+      })
+    }
+    else if(workout.day === 5){
+      workout.exercises.forEach(exercise => {
+        if(exercise.weight){
+        total[5] += exercise.weight;
+        }
+      })
+    }
+    else if(workout.day === 6){
      workout.exercises.forEach(exercise => {
-       total[0] += exercise.weight
+      if(exercise.weight){
+       total[6] += exercise.weight;
+      }
      })
     }
   });

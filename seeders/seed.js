@@ -2,22 +2,20 @@ let mongoose = require("mongoose");
 let Workout = require("../models/workouts");
 
 module.exports = function(){
-mongoose.connect(process.env.MONGODB_URI || "mongodb://cnmiller127:superBase93!@ds227322.mlab.com:27322/heroku_51b9phxn", { useNewUrlParser: true });
+  var d = new Date();
+  
 
-// mongoose.connect("mongodb://localhost/workout", {
-//   useNewUrlParser: true,
-//   useFindAndModify: false,
-//   useUnifiedTopology: true
-// });
-var date = new Date();
+
 let workoutSeed = [
   {
-    date: new Date().setDate(new Date().getDate()-10),
+    date: new Date(new Date().setDate(new Date().getDate()-8)),
+    totalDuration: 50,
+    day: dayCalc(8),
     exercises: [
       {
         type: "resistance",
         name: "Bicep Curl",
-        duration: 20,
+        duration: 30,
         weight: 100,
         reps: 10,
         sets: 4
@@ -25,7 +23,9 @@ let workoutSeed = [
     ]
   },
   {
-    date: new Date().setDate(new Date().getDate()-9),
+    date: new Date(new Date().setDate(new Date().getDate()-7)),
+    totalDuration: 20,
+    day: dayCalc(7),
     exercises: [
       {
         type: "resistance",
@@ -38,7 +38,9 @@ let workoutSeed = [
     ]
   },
   {
-    date: new Date().setDate(new Date().getDate()-8),
+    date: new Date(new Date().setDate(new Date().getDate()-6)),
+    totalDuration: 25,
+    day: dayCalc(6),
     exercises: [
       {
         type: "resistance",
@@ -51,22 +53,26 @@ let workoutSeed = [
     ]
   },
   {
-    date: new Date().setDate(new Date().getDate()-7),
+    date: new Date(new Date().setDate(new Date().getDate()-5)),
+    totalDuration: 125,
+    day: dayCalc(5),
     exercises: [
       {
         type: "cardio",
         name: "Running",
-        duration: 25,
+        duration: 125,
         distance: 4
       }
     ]
   },
   {
-    date: new Date().setDate(new Date().getDate()-6),
+    date: new Date(new Date().setDate(new Date().getDate()-4)),
+    totalDuration: 20,
+    day: dayCalc(4),
     exercises: [
       {
         type: "resistance",
-        name: "Bench Press",
+        name: "Sumo Squats",
         duration: 20,
         weight: 285,
         reps: 10,
@@ -75,20 +81,24 @@ let workoutSeed = [
     ]
   },
   {
-    date: new Date().setDate(new Date().getDate()-5),
+    date: new Date(new Date().setDate(new Date().getDate()-3)),
+    totalDuration: 20,
+    day: dayCalc(3),
     exercises: [
       {
         type: "resistance",
-        name: "Bench Press",
+        name: "Face Pulls",
         duration: 20,
-        weight: 300,
+        weight: 120,
         reps: 10,
         sets: 4
       }
     ]
   },
   {
-    date: new Date().setDate(new Date().getDate()-4),
+    date: new Date(new Date().setDate(new Date().getDate()-2)),
+    totalDuration: 30,
+    day: dayCalc(2),
     exercises: [
       {
         type: "resistance",
@@ -101,20 +111,24 @@ let workoutSeed = [
     ]
   },
   {
-    date: new Date().setDate(new Date().getDate()-3),
+    date: new Date(new Date().setDate(new Date().getDate()-1)),
+    totalDuration: 20,
+    day: dayCalc(1),
     exercises: [
       {
         type: "resistance",
-        name: "Bench Press",
+        name: "Hammer Curls",
         duration: 20,
-        weight: 300,
+        weight: 30,
         reps: 10,
         sets: 4
       }
     ]
   },
   {
-    date: new Date().setDate(new Date().getDate()-2),
+    date: new Date(new Date().setDate(new Date().getDate()-8)),
+    totalDuration: 20,
+    day: dayCalc(8),
     exercises: [
       {
         type: "resistance",
@@ -127,11 +141,13 @@ let workoutSeed = [
     ]
   },
   {
-    date: new Date().setDate(new Date().getDate()-1),
+    date: new Date(new Date().setDate(new Date().getDate()-3)),
+    totalDuration: 30,
+    day: dayCalc(3),
     exercises: [
       {
-        type: "resistance",
-        name: "Bench",
+        type: "cardio",
+        name: "Swimming",
         duration: 30,
         distance: 2
       }
@@ -140,14 +156,30 @@ let workoutSeed = [
 ];
 
 Workout.deleteMany({})
-  .then(() => Workout.collection.insertMany(workoutSeed))
+  .then(() => Workout.insertMany(workoutSeed))
   .then(data => {
-    console.log(data.result.n + " records inserted!");
+    console.log(data.length + " records inserted!");
     process.exit(0);
   })
   .catch(err => {
     console.error(err);
     process.exit(1);
   });
+
+}
+
+function dayCalc(num){
+  var d = new Date();
+  num = num % 7;
+  var sub = d.getDay() - num;
+
+  if(sub >= 0){
+    return sub
+  }
+  else{
+    sub += 7;
+    return sub;
+  }
+  
 
 }

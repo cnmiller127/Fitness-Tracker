@@ -9,7 +9,7 @@ var d = new Date();
 module.exports = function (app) {
     //get all workouts
     app.get("/api/workouts", (req, res) => {
-        Workouts.find({}).then(data => {
+        Workouts.find({}).sort({date: 1}).then(data => {
             res.json(data);
         }).catch(err => { 
             console.log(err);
@@ -43,11 +43,11 @@ module.exports = function (app) {
 
        //get all workouts
        app.get("/api/workouts/range", async (req, res) => {
-        var sunday = new Date().setDate(new Date().getDate() - d.getDay());
+        var sunday = new Date(new Date().setDate(new Date().getDate() - d.getDay())).setHours(00, 00, 00);
         console.log("sunday", sunday);
         try{
-            const data = await Workouts.find({}, {day: {$gte: 0}});
-            console.log(data);
+            const data = await Workouts.find({date: {$gte: sunday}}).sort({date: 1});
+                console.log(data);
                 res.json(data);
             }
         catch(err){
