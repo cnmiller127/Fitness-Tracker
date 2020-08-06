@@ -34,7 +34,8 @@ API.getWorkoutsInRange()
   return arr;
   }
 function populateChart(data) {
-  let durations = duration(data);
+  let durationsLine = durationLine(data);
+  let durationsPie = durationPie(data);
   let poundsBar = calculateTotalWeightBar(data);
   let poundsDonut = calculateTotalWeightDonut(data);
   let workouts = workoutNames(data);
@@ -62,7 +63,7 @@ function populateChart(data) {
           label: "Workout Duration In Minutes",
           backgroundColor: "red",
           borderColor: "red",
-          data: durations,
+          data: durationsLine,
           fill: false
         }
       ]
@@ -154,7 +155,7 @@ function populateChart(data) {
         {
           label: "Excercises Performed",
           backgroundColor: colors,
-          data: durations
+          data: durationsPie
         }
       ]
     },
@@ -187,7 +188,7 @@ function populateChart(data) {
   });
 }
 // Modified to loop through each exercise duration within workout and see if that exercise exists
-function duration(data) {
+function durationPie(data) {
   let durations = [];
 
   data.forEach(workout => {
@@ -269,6 +270,35 @@ function calculateTotalWeightBar(data) {
        total[6] += exercise.weight;
       }
      })
+    }
+  });
+
+  return total;
+}
+function durationLine(data) {
+  let total = [0, 0, 0, 0, 0, 0, 0];
+  console.log(data);
+  data.forEach(workout => {
+    if(workout.day === 0){
+     total[0] = workout.totalDuration;
+    }
+    else if(workout.day === 1){
+      total[1] = workout.totalDuration; 
+    }
+    else if(workout.day === 2){
+      total[2] = workout.totalDuration;
+    }
+    else if(workout.day === 3){
+      total[3] = workout.totalDuration; 
+    }
+    else if(workout.day === 4){
+      total[4] = workout.totalDuration; 
+    }
+    else if(workout.day === 5){
+      total[5] = workout.totalDuration; 
+        }
+    else if(workout.day === 6){
+      total[6] = workout.totalDuration; 
     }
   });
 
