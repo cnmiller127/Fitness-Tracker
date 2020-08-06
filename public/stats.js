@@ -35,7 +35,8 @@ API.getWorkoutsInRange()
   }
 function populateChart(data) {
   let durations = duration(data);
-  let pounds = calculateTotalWeight(data);
+  let poundsBar = calculateTotalWeightBar(data);
+  let poundsDonut = calculateTotalWeightDonut(data);
   let workouts = workoutNames(data);
   const colors = generatePalette();
 
@@ -107,7 +108,7 @@ function populateChart(data) {
       datasets: [
         {
           label: "Pounds",
-          data: pounds,
+          data: poundsBar,
           backgroundColor: [
             "rgba(255, 99, 132, 0.2)",
             "rgba(54, 162, 235, 0.2)",
@@ -173,7 +174,7 @@ function populateChart(data) {
         {
           label: "Excercises Performed",
           backgroundColor: colors,
-          data: pounds
+          data: poundsDonut
         }
       ]
     },
@@ -204,8 +205,19 @@ function duration(data) {
 
   return durations;
 }
+function calculateTotalWeightDonut(data) {
+  let total = [];
+
+  data.forEach(workout => {
+    workout.exercises.forEach(exercise => {
+      total.push(exercise.weight);
+    });
+  });
+
+  return total;
+}
 // Modfied to sort total weight lifted each day of week
-function calculateTotalWeight(data) {
+function calculateTotalWeightBar(data) {
   let total = [0, 0, 0, 0, 0, 0, 0];
   console.log(data);
   data.forEach(workout => {
