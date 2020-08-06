@@ -17,8 +17,8 @@ app.use(express.static("public"));
 require("./routes/api-routes")(app);
 require("./routes/html-routes")(app);
 //Toggle on to reset database with seed file
-seed();
-// mongoose.connect(process.env.MONGODB_URI || "mongodb://cnmiller127:superBase93!@ds227322.mlab.com:27322/heroku_51b9phxn", { useNewUrlParser: true });
+// seed();
+mongoose.connect(process.env.MONGODB_URI || "mongodb://cnmiller127:superBase93!@ds227322.mlab.com:27322/heroku_51b9phxn", { useNewUrlParser: true });
 
 // Listen on port 3000
 app.listen(PORT, () => {
