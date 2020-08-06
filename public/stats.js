@@ -185,19 +185,28 @@ function populateChart(data) {
     }
   });
 }
-
+// Modified to loop through each exercise duration within workout and see if that exercise exists
 function duration(data) {
   let durations = [];
 
   data.forEach(workout => {
-    durations.push(workout.totalDuration);
+    workout.exercises.forEach(exercise => {
+    if(!durations.includes(exercise))
+    {
+    durations.push(exercise.duration);
+    }
+    else{
+      var found = durations.findIndex(exercise);
+      durations[found] += exercise.duration;
+    }
+    })
   });
 
   return durations;
 }
-
+// Modfied to sort total weight lifted each day of week
 function calculateTotalWeight(data) {
-  let total = [0,0,0,0,0,0,0];
+  let total = [0, 0, 0, 0, 0, 0, 0];
   console.log(data);
   data.forEach(workout => {
     if(workout.day === 0){
@@ -253,13 +262,16 @@ function calculateTotalWeight(data) {
 
   return total;
 }
-
+// Modifed for no repeating exercise name
 function workoutNames(data) {
   let workouts = [];
 
   data.forEach(workout => {
     workout.exercises.forEach(exercise => {
+    if(!workouts.includes(exercise.name))
+    {
       workouts.push(exercise.name);
+    }
     });
   });
   
